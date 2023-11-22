@@ -49,3 +49,27 @@ def ruota_pdf(input_filename, output_filename, gradi=180):
 # Esempi di utilizzo
 # estrai_pagine('input.pdf', 'output.pdf', 1, 3)
 # ruota_pdf('input.pdf', 'output.pdf', 90)
+from PyPDF2 import PdfMerger
+
+def concat_pdfs(pdf_list, output_path):
+    merger = PdfMerger()
+
+    for pdf in pdf_list:
+        merger.append(pdf)
+
+    merger.write(output_path)
+    merger.close()
+
+    return output_path
+
+# Example usage:
+# Specify the PDF files to merge
+pdf_files = ['./Immatricolazione', 'file2.pdf', 'file3.pdf']
+# Specify the output file path
+output_file = 'merged_document.pdf'
+
+# Call the function with the list of PDF files
+merged_pdf_path = concat_pdfs(pdf_files, output_file)
+
+print(f"PDF files have been merged into {merged_pdf_path}")
+
